@@ -1,0 +1,41 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Did you put your bin out before 6am on collection day?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["bin-out-time"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["bin-out-time"], href: "#bin-out-time" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "bin-out-time",
+      fieldset: {
+        legend: {
+          text: "Did you put your bin out before 6am on collection day?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "Standard guidance across the UK and Ireland states bins must be out by 6am on collection day to guarantee collection." },
+      errorMessage: errors["bin-out-time"] if errors else null,
+      value: data["bin-out-time"],
+      items: [
+        { value: "yes-before-6am", text: "Yes, before 6am" },
+        { value: "no-after-6am", text: "No, after 6am" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
