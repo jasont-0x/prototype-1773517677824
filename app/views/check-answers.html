@@ -1,0 +1,79 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Check your answers before sending" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    <h1 class="govuk-heading-xl">Check your answers before sending</h1>
+
+    {{ govukSummaryList({
+      rows: [
+      {
+        key: { text: "Which bin was not collected?" },
+        value: { text: data["bin-type"] if data["bin-type"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/bin-type",
+            text: "Change",
+            visuallyHiddenText: "which bin was not collected?"
+          }]
+        }
+      },
+      {
+        key: { text: "What is your scheduled collection day?" },
+        value: { text: data["collection-day"] if data["collection-day"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/collection-day",
+            text: "Change",
+            visuallyHiddenText: "what is your scheduled collection day?"
+          }]
+        }
+      },
+      {
+        key: { text: "Did you put your bin out before 6am on collection day?" },
+        value: { text: data["bin-out-time"] if data["bin-out-time"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/bin-out-time",
+            text: "Change",
+            visuallyHiddenText: "did you put your bin out before 6am on collection day?"
+          }]
+        }
+      },
+      {
+        key: { text: "What date was your bin missed?" },
+        value: { text: data["collection-date"] if data["collection-date"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/collection-date",
+            text: "Change",
+            visuallyHiddenText: "what date was your bin missed?"
+          }]
+        }
+      },
+      {
+        key: { text: "Give more details about the missed collection" },
+        value: { text: data["additional-information"] if data["additional-information"] else "Not answered" },
+        actions: {
+          items: [{
+            href: "/additional-information",
+            text: "Change",
+            visuallyHiddenText: "give more details about the missed collection"
+          }]
+        }
+      }
+      ]
+    }) }}
+
+    <form method="post" novalidate>
+      {{ govukButton({ text: "Confirm and send" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
