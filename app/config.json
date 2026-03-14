@@ -1,0 +1,5 @@
+{
+  "serviceName": "TEST 1 - Report a missed bin collection",
+  "serviceUrl": "/start",
+  "useAuth": false
+}
