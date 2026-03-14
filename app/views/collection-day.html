@@ -1,0 +1,44 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "What is your scheduled collection day?" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["collection-day"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["collection-day"], href: "#collection-day" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukRadios({
+      name: "collection-day",
+      fieldset: {
+        legend: {
+          text: "What is your scheduled collection day?",
+          isPageHeading: true,
+          classes: "govuk-fieldset__legend--l"
+        }
+      },
+      hint: { text: "This is the day your bins are normally collected. Collection standards across the UK and Ireland require bins to be collected within 24 hours of the scheduled day." },
+      errorMessage: errors["collection-day"] if errors else null,
+      value: data["collection-day"],
+      items: [
+        { value: "monday", text: "Monday" },
+        { value: "tuesday", text: "Tuesday" },
+        { value: "wednesday", text: "Wednesday" },
+        { value: "thursday", text: "Thursday" },
+        { value: "friday", text: "Friday" }
+      ]
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
