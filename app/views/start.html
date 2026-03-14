@@ -1,0 +1,24 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Report a missed bin collection" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+    <h1 class="govuk-heading-xl">Report a missed bin collection</h1>
+    <p class="govuk-body">Use this service to report when your bin has not been collected on your scheduled collection day.</p>
+    <p class="govuk-body">You will need:</p>
+    <ul class="govuk-list govuk-list--bullet">
+      <li>your address</li>
+      <li>which bin was missed</li>
+      <li>your scheduled collection day</li>
+    </ul>
+    <p class="govuk-body">It takes around <strong>5 minutes</strong> to complete.</p>
+    {{ govukButton({
+      text: "Start now",
+      href: "/bin-type",
+      isStartButton: true
+    }) }}
+  </div>
+</div>
+{% endblock %}
