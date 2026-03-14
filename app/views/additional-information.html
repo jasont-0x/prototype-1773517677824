@@ -1,0 +1,37 @@
+{% extends "layouts/main.html" %}
+
+{% set pageName = "Give more details about the missed collection" %}
+
+{% block content %}
+<div class="govuk-grid-row">
+  <div class="govuk-grid-column-two-thirds">
+
+    {{ govukBackLink({ text: "Back", href: "javascript:history.back()" }) }}
+
+    {% if errors and errors["additional-information"] %}
+    {{ govukErrorSummary({
+      titleText: "There is a problem",
+      errorList: [{ text: errors["additional-information"], href: "#additional-information" }]
+    }) }}
+    {% endif %}
+
+    <form method="post" novalidate>
+    {{ govukTextarea({
+      id: "additional-information",
+      name: "additional-information",
+      label: {
+        text: "Give more details about the missed collection",
+        isPageHeading: true,
+        classes: "govuk-label--l"
+      },
+      hint: { text: "For example, if your bin was blocked by cars or if other bins on your street were collected." },
+      errorMessage: errors["additional-information"] if errors else null,
+      value: data["additional-information"],
+      rows: 5
+    }) }}
+      {{ govukButton({ text: "Continue" }) }}
+    </form>
+
+  </div>
+</div>
+{% endblock %}
